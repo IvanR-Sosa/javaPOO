@@ -1,34 +1,27 @@
 
 package Servicio;
 
+import Entidad.Circunferencia;
 import java.util.Scanner;
-import pooej2.Circunferenca;
+
 
 
 public class Servicio {
     Scanner leer=new  Scanner(System.in);
-    Circunferenca Circulo=new Circunferenca();
-    
-    public Circunferenca crearCircunferencia(){
-        System.out.println("ingrese radio");
-        Circulo.setRadio(leer.nextDouble());
-        return Circulo;  
+  
+    public Circunferencia crearCircunferencia(){
+        Circunferencia circulo=new Circunferencia();
+        System.out.print("ingrese el radio de esta circunferencia: ");circulo.setRadio(leer.nextDouble());
+        
+        return circulo;
     }
-    public Circunferenca area(){
-       
-        Double area;
-        area=Math.PI*(Math.pow(Circulo.getRadio(),2));
-        System.out.println("el area es: "+ area);
-         
-        return Circulo;
+    public Double perimetro(Circunferencia circulo){
+        Double perimetro=2*Math.PI*circulo.getRadio();
+        return perimetro;
     }
-    public Circunferenca perimetro(){
-       
-        Double perimetro;
-        perimetro=Math.PI*(Math.pow(Circulo.getRadio(),2));
-        System.out.println("el area es: "+ perimetro);
-         
-        return Circulo;
+    public Double area(Circunferencia circulo){
+        Double area=Math.PI*(Math.pow(circulo.getRadio(), 2));
+        return area;
     }
     
 }

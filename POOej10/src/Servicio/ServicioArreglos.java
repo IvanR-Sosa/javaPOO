@@ -36,6 +36,7 @@ public class ServicioArreglos {
             System.out.println("["+arreglos.getB()[i]+"]");
         }
     }
+    
     }
     
 
