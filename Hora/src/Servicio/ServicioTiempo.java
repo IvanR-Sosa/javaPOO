@@ -1,9 +1,9 @@
 package Servicio;
 
 import Entidad.Tiempo;
+
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class ServicioTiempo {
 
@@ -46,27 +46,39 @@ public class ServicioTiempo {
         }
     }
 
-    public void real(Tiempo hora) {
-        boolean bandera = false;
-       while (true)
-           
-            try {
-
-                Calendar c = Calendar.getInstance();
-
+    public void real(Tiempo hora)throws InterruptedException {
+         
+        try (Scanner sc = new Scanner (System.in)){
+            System.out.println("para terminar presione enter");
+            Thread inputThread = new Thread(() ->{
+               /*
+                aqui lo que vamos a hacer es permitir el ingreso de la tecla enter en cualquier momento
+                sin necesidad de pedir el llamado por teclado
+                */
+                leer.nextLine();//espera hasta que el usuario presione enter.
+            });
+            //el start es para que se inicie una condicion dentro del hilo 
+            inputThread.start();
+       while (true){
+           Calendar c = Calendar.getInstance();
                 hora.setHoras(c.get(Calendar.HOUR));
+                
                 hora.setMinutos(c.get(Calendar.MINUTE));
+       
                 hora.setSegundos(c.get(Calendar.SECOND));
                 String horasReal = hora.getHoras() + ":" + hora.getMinutos() + ":" + hora.getSegundos();
                 System.out.println(horasReal);
                 Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                System.out.println("error");
-            }
+                //isAlive va de la mano con start en este caso el es el que espera el ingreso de la tecla para que el break rompa el ciclo
+           if (!inputThread.isAlive()) {
+               break;
+           }
+     
+       }       
            
-            
         }
-       
-
+    }
+         
+            
     }
 
